@@ -1,0 +1,40 @@
+main {
+    max-width: 1200px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+*:nth-child(even) {
+    background-color: #a07676;
+}   
+h1 {visibility: hidden;
+    
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#article1 {
+    background-color: #4b4646;
+}
+
+#article1:first-of-type {
+    background-color: #4b4646;
+}
+
+button:hover {
+    background-color: #8b2121;
+    color: rgb(221, 0, 0);
+}
+
+footer::after {
+    content: "© 2024 TechGadget Inc. All rights reserved.";
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
