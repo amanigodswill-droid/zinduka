@@ -1,3 +1,1 @@
-# zinduka
-
-This is my first professional website
+# the_tech_gadget_price
