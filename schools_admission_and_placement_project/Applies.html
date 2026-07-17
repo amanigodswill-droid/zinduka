@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admissions Atelier - Academic History</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fbfe;
+            --card-bg: #e1f3ff;
+            --primary-text: #2d4a5c;
+            --secondary-text: #5a7d91;
+            --accent-blue: #4a90e2;
+            --input-bg: #ffffff;
+            --border-radius: 16px;
+            --success-green: #00897b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            min-height: 100vh;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Navigation */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Progress Stepper */
+        .stepper {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .step {
+            text-align: center;
+            flex: 1;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--secondary-text);
+            z-index: 2;
+        }
+
+        .step-icon {
+            width: 35px;
+            height: 35px;
+            background: #eee;
+            border-radius: 10px;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step.active { color: var(--primary-text); }
+        .step.active .step-icon { 
+            background: var(--primary-text); 
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Form Content */
+        h1 { font-size: 2rem; margin-bottom: 15px; }
+        .description { color: var(--secondary-text); margin-bottom: 30px; }
+
+        .section-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            float: right;
+            background: white;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+        }
+
+        .label-group { margin-bottom: 15px; }
+        label { 
+            display: block; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            margin-bottom: 8px; 
+            color: var(--secondary-text);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: var(--input-bg);
+            font-size: 1rem;
+            color: var(--primary-text);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #d1e9ff;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Document List */
+        .doc-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .check-circle {
+            width: 18px;
+            height: 18px;
+            background: var(--success-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.6rem;
+        }
+
+        /* Footer Buttons */
+        .footer-nav {
+            margin-top: auto;
+            padding-top: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-back {
+            background: none;
+            border: none;
+            font-weight: bold;
+            color: var(--primary-text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-continue {
+            flex-grow: 1;
+            background: #3e5261;
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+        }
+    </style>
+</head>
+<body class="antialiased">
+<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 brand-bg rounded-lg flex items-center justify-center">
+                    <i class="fas fa-graduation-cap text-white text-xl"></i>
+                </div>
+                <span class="font-bold text-xl tracking-tight text-slate-800">Academic Atelier</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-10">
+                <a href="index.html" class="text-sm font-medium hover:text-sky-600 transition-colors">Home</a>
+                <a href="Profile.html" class="text-sm font-medium hover:text-sky-600 transition-colors">Profile</a>
+                <a href="Schools.html" class="text-sm font-medium hover:text-sky-600 transition-colors">Schools</a>
+                
+                <a href="Applies.html" class="brand-bg text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity">
+                    Start Application
+                </a>
+            </div>
+
+            <button class="md:hidden text-slate-600">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+
+
+<div class="container">
+    <div class="header">
+        <div class="logo">🎓 Admissions Atelier</div>
+        <div style="font-size: 24px;">👤</div>
+    </div>
+
+    <div class="stepper">
+        <div class="step">
+            <div class="step-icon">👤</div>
+            Personal Info
+        </div>
+        <div class="step active">
+            <div class="step-icon">📑</div>
+            Academic History
+        </div>
+        <div class="step">
+            <div class="step-icon">☁️</div>
+            Documents
+        </div>
+    </div>
+
+    <h1>Academic Excellence</h1>
+    <p class="description">Provide your primary and secondary education performance details. We use this data to curate your eligibility.</p>
+
+    <div class="section-card">
+        <span class="badge">Verified Input</span>
+        <h3>Primary Education (KCPE)</h3>
+        <p style="font-size: 0.8rem; margin-bottom: 15px;">Kenya Certificate of Primary Education results</p>
+        
+        <div class="label-group">
+            <label>School Name</label>
+            <input type="text" placeholder="e.g. Nairobi Primary School">
+        </div>
+
+        <div class="grid-2">
+            <div class="label-group">
+                <label>Year of Completion</label>
+                <select>
+                    <option>Select Year</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                </select>
+            </div>
+            <div class="label-group">
+                <label>Mean Score (/500)</label>
+                <input type="number" placeholder="e.g. 350">
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h3>Secondary Education (KCSE)</h3>
+        <div class="label-group" style="margin-top:15px;">
+            <label>Secondary School Name</label>
+            <input type="text" placeholder="e.g. Alliance High School">
+        </div>
+
+        <div class="grid-2">
+            <div class="label-group">
+                <label>English Grade</label>
+                <select>
+                    <option>Select Grade</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+
+                </select>
+            </div>
+            <div class="label-group">
+                <label>Mathematics Grade</label>
+                <select>
+                    <option>Select Grade</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-box">
+        <div style="font-size: 24px;"></div>
+        <div>
+            <strong>Did you know?</strong>
+            <p style="font-size: 0.85rem; margin-top: 5px;">Students with an A in Mathematics are eligible for our accelerated Engineering Atelier program.</p>
+        </div>
+    </div>
+
+    <div class="section-card" style="background: #eef8ff;">
+        <h4 style="font-size: 0.8rem; color: #4a6a8a; margin-bottom: 15px; letter-spacing: 1px;">REQUIRED DOCUMENTS</h4>
+        <div class="doc-item">
+            <div class="check-circle">✓</div>
+            KCPE Result Slip
+        </div>
+        <div class="doc-item">
+            <div class="check-circle">✓</div>
+            KCSE Certificate
+        </div>
+        <div class="doc-item" style="opacity: 0.5;">
+            <div class="check-circle" style="background: #aab8c2;">...</div>
+            Birth Certificate
+        </div>
+    </div>
+
+    <div class="footer-nav">
+        <button class="btn-back">← Back</button>
+        <button class="btn-continue">
+            Continue to Documents &rarr;
+        </button>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. SELECT ELEMENTS
+    const continueBtn = document.querySelector('.btn-continue');
+    const backBtn = document.querySelector('.btn-back');
+    const mathGradeSelect = document.querySelectorAll('select')[2]; // Targeting Math Grade select
+    const infoBox = document.querySelector('.info-box');
+
+    // 2. MATH GRADE INTERACTION
+    mathGradeSelect.addEventListener('change', (e) => {
+        if (e.target.value === 'A') {
+            infoBox.style.border = "2px solid #4a90e2";
+            infoBox.style.backgroundColor = "#e1f3ff";
+            infoBox.classList.add('animate-pulse'); // Tailwind animation
+        } else {
+            infoBox.style.border = "none";
+            infoBox.classList.remove('animate-pulse');
+        }
+    });
+
+    // 3. FORM VALIDATION & REDIRECT
+    continueBtn.addEventListener('click', () => {
+        const inputs = document.querySelectorAll('input[type="text"]');
+        let allFilled = true;
+
+        inputs.forEach(input => {
+            if (input.value.trim() === "") {
+                input.style.border = "1px solid #ff4d4d";
+                allFilled = false;
+            } else {
+                input.style.border = "none";
+            }
+        });
+
+        if (!allFilled) {
+            alert("Please fill in your school names before continuing.");
+            return;
+        }
+
+        // Visual Feedback
+        continueBtn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Saving Records...`;
+        continueBtn.style.opacity = "0.8";
+        continueBtn.disabled = true;
+
+        // Simulate saving to a database
+        setTimeout(() => {
+            window.location.href = "Documents.html"; 
+        }, 1500);
+    });
+
+    // 4. NAVIGATION LOGIC
+    backBtn.addEventListener('click', () => {
+        window.history.back();
+    });
+
+    // 5. MOBILE MENU
+    const menuBtn = document.querySelector('.md\\:hidden');
+    if (menuBtn) {
+        menuBtn.addEventListener('click', () => {
+            alert("Navigation menu would expand here.");
+        });
+    }
+});
+</script>
+
+</body>
+</html>

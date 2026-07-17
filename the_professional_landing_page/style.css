@@ -61,13 +61,10 @@ header {
     background: linear-gradient(to right, #0f172a, #1e3a8a);
     color: white;
     text-align: center;
-    padding: 4rem 1rem;
-}
-
+    padding:  1rem;}
 .hero h2 {
     font-size: 1.8rem;
-    margin-bottom: 1rem;
-}
+    margin-bottom: 1rem;}
 
 .hero p {
     margin-bottom: 1.5rem;

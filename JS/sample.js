@@ -1,0 +1,1 @@
+console.log("This is JavaScript in a different file");

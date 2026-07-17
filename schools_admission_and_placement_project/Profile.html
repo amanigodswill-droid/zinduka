@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - Student Records</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<style>
+ :root {
+            --bg-color: #f0f7ff;
+            --card-bg: #ffffff;
+            --section-bg: #e6f4f9;
+            --text-main: #334e5e;
+            --text-label: #2a7a9e;
+            --accent-btn: #4a626e;
+            --input-border: #e1e8ed;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Header Section */
+        .header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .back-btn {
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-main);
+        }
+
+        .profile-pic-container {
+            position: relative;
+            width: 100px;
+            margin: 10px 20px;
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            background: #eee;
+            border-radius: 15px;
+            display: block;
+        }
+
+        .cam-icon {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background: #546e7a;
+            color: white;
+            padding: 5px;
+            border-radius: 8px;
+            font-size: 12px;
+            border: 2px solid white;
+        }
+
+        /* Content Text */
+        .intro {
+            padding: 0 20px;
+        }
+
+        .intro h1 {
+            color: var(--text-main);
+            margin-bottom: 8px;
+            font-size: 24px;
+        }
+
+        .intro p {
+            color: var(--text-label);
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        /* Form Sections */
+        .section-box {
+            background-color: var(--section-bg);
+            margin: 15px;
+            padding: 20px;
+            border-radius: 25px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-main);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-label);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--input-border);
+            border-radius: 10px;
+            font-size: 15px;
+            color: #333;
+            box-sizing: border-box;
+            background: white;
+        }
+
+        /* Level Selector Toggle Style */
+        .level-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .level-option {
+            padding: 12px;
+            border: 1px solid var(--input-border);
+            border-radius: 10px;
+            background: white;
+            text-align: center;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .level-option.active {
+            background-color: #d1e9f2;
+            border-color: #adc6d1;
+        }
+
+        /* Footer Buttons */
+        .footer {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .discard-btn {
+            background: none;
+            border: none;
+            color: #2a7a9e;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--accent-btn);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .cam-icon {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.cam-icon:hover {
+    transform: scale(1.1);
+}
+        </style>
+<body class="antialiased">
+
+<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 brand-bg rounded-lg flex items-center justify-center">
+                    <i class="fas fa-graduation-cap text-white text-xl"></i>
+                </div>
+                <span class="font-bold text-xl tracking-tight text-slate-800">Academic Atelier</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-10">
+                <a href="index.html" class="text-sm font-medium hover:text-sky-600 transition-colors">Home</a>
+                <a href="Profile.html" class="text-sm font-medium hover:text-sky-600 transition-colors">Profile</a>
+                <a href="Schools.html" class="text-sm font-medium hover:text-sky-600 transition-colors">Schools</a>
+                
+                <a href="Applies.html" class="brand-bg text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity">
+                    Start Application
+                </a>
+            </div>
+
+            <button class="md:hidden text-slate-600">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+<div class="container">
+    <div class="header">
+        <span class="back-btn">←</span>
+        <span style="font-weight: bold; color: var(--text-main);">Edit Profile</span>
+    </div>
+
+    <div class="profile-pic-container">
+        <img src="https://via.placeholder.com/100" alt="Profile" class="profile-pic">
+        <div class="cam-icon">📷</div>
+    </div>
+
+    <div class="intro">
+        <h1>Student Records</h1>
+        <p>Update your official information for the upcoming academic year. Ensure all contact details are current for admission notifications.</p>
+    </div>
+
+    <div class="section-box">
+        <div class="section-title">👤 Personal Information</div>
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" placeholder="Enter your full name">
+        </div>
+        <div class="form-group">
+            <label>Date of Birth</label>
+            <input type="date" placeholder="Select date">
+        </div>
+        <div class="form-group">
+            <label>Gender</label>
+            <select>
+                <option>Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Nationality</label>
+            <input type="text" placeholder="Enter your nationality">
+        </div>
+    </div>
+
+    <div class="section-box">
+        <div class="section-title">🎓 Academic Status</div>
+        <label>Current Level</label>
+        <div class="level-selector">
+            <div class="level-option">KCPE</div>
+            <div class="level-option">KCSE</div>
+        </div>
+        <div class="form-group" style="margin-top:15px;">
+            <label>Expected Graduation Year</label>
+            <input type="number" placeholder="e.g. 2025">
+        </div>
+    </div>
+
+    <div class="section-box">
+        <div class="section-title">@ Contact Details</div>
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="Enter your email address">
+        </div>
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" placeholder="Enter your phone number">
+        </div>
+        <div class="form-group">
+            <label>Physical Address</label>
+            <textarea style="width:100%; border-radius:10px; border:1px solid #e1e8ed; padding:10px; height:60px;" placeholder="Enter your physical address"></textarea>
+        </div>
+    </div>
+
+    <div class="footer">
+        <button class="discard-btn">Discard Changes</button>
+        <button class="save-btn">Save Changes</button>
+    </div>
+</div>
+<script>
+   document.addEventListener('DOMContentLoaded', () => {
+
+    // 1. LEVEL SELECTOR LOGIC (KCPE / KCSE)
+    const levelOptions = document.querySelectorAll('.level-option');
+    levelOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            levelOptions.forEach(opt => opt.classList.remove('active'));
+            option.classList.add('active');
+        });
+    });
+
+    // 2. PROFILE PICTURE PREVIEW
+    // When clicking the camera icon, it triggers a hidden file input
+    const camIcon = document.querySelector('.cam-icon');
+    const profilePic = document.querySelector('.profile-pic');
+    
+    // Create a hidden input element
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+
+    camIcon.addEventListener('click', () => fileInput.click());
+
+    fileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                profilePic.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // 3. SAVE CHANGES LOGIC
+    const saveBtn = document.querySelector('.save-btn');
+    saveBtn.addEventListener('click', () => {
+        saveBtn.innerText = "Saving...";
+        saveBtn.style.opacity = "0.7";
+        saveBtn.disabled = true;
+
+        // Simulate an API Save
+        setTimeout(() => {
+            saveBtn.innerText = "Changes Saved!";
+            saveBtn.style.backgroundColor = "#2a7a9e"; // Turn blue for success
+            
+            setTimeout(() => {
+                alert("Profile updated successfully!");
+                window.location.href = "Profile.html"; // Redirect back to profile page after saving
+            }, 800);
+        }, 1500);
+    });
+
+    // 4. DISCARD CHANGES / BACK BUTTON
+    const discardBtn = document.querySelector('.discard-btn');
+    const backBtn = document.querySelector('.back-btn');
+
+    const handleExit = () => {
+        if (confirm("Are you sure? Any unsaved changes will be lost.")) {
+            window.location.href = "Profile.html";
+        }
+    };
+
+    discardBtn.addEventListener('click', handleExit);
+    backBtn.addEventListener('click', handleExit);
+
+    // 5. MOBILE NAVIGATION TOGGLE
+    const menuBtn = document.querySelector('.md\\:hidden');
+    const navLinks = document.querySelector('.md\\:flex');
+
+    if (menuBtn) {
+        menuBtn.addEventListener('click', () => {
+            // Simple toggle for mobile view
+            alert("Mobile menu would open here. Ensure your nav-menu ID is set.");
+        });
+    }
+});
+
+</script>
+
+</body>
+</html>
